@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Las notas</string>
+    <string-array name="array_order">
+        <item>Newest first</item>
+        <item>Oldest first</item>
+    </string-array>
+</resources>
