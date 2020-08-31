@@ -26,59 +26,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvNotes"
         android:layout_width="match_parent"
         android:layout_height="663dp"
         android:layout_marginTop="1dp"
+        android:scrollbars="vertical"
+        android:layout_margin="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_new_note"
-
         tools:layout_editor_absoluteX="1dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            tools:background="@android:color/holo_blue_bright">
-            <TextView
-                android:id="@+id/txtNoteHeader"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="top"
-                android:textSize="20dp"
-                tools:text="The kittens saved the day.."
-                android:text="The kittens saved the day.."
-                />
-            <TextView
-                android:id="@+id/txtNoteDate"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="10dp"
-                tools:text="Sep 28th, 2020"
-                android:text="Sep 28th, 2020"
-                />
-            <TextView
-                android:id="@+id/txtNoteHeader2"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="top"
-                android:textSize="20dp"
-                tools:text="The kittens saved the day.."
-                android:text="The kittens saved the day.."
-                />
-            <TextView
-                android:id="@+id/txtNoteDate2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="10dp"
-                tools:text="Sep 28th, 2020"
-                android:text="Sep 28th, 2020"
-                />
-        </LinearLayout>
-    </ScrollView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

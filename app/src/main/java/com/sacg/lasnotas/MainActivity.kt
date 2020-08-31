@@ -1,5 +1,7 @@
 package com.sacg.lasnotas
 
+import adapters.ForecastListAdapter
+import adapters.NotesAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -7,8 +9,13 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import models.Note
 
-class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
+
+    lateinit var notes: ArrayList<Note>
 
     internal val TAG = MainActivity::class.java.simpleName
     internal lateinit var spinner: Spinner
@@ -26,6 +33,15 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             }
 
         spinner.onItemSelectedListener = this
+
+        val rvNotes = findViewById<View>(R.id.rvNotes) as RecyclerView
+        notes = Note.createNotesList(20)
+        val adapter = NotesAdapter(notes)
+        rvNotes.adapter = adapter
+        rvNotes.layoutManager = LinearLayoutManager(this)
+        /*val forecastList = findViewById<RecyclerView>(R.id.forecast_list)
+        forecastList.layoutManager = LinearLayoutManager(this)
+        forecastList.adapter = ForecastListAdapter(items)*/
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
