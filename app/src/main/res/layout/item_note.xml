@@ -15,6 +15,16 @@
         android:textSize="20sp"
         tools:text= "example of note"/>
 
+    <TextView
+        android:id="@+id/tvNoteDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="10sp"
+        android:gravity="right"
+        android:textColor="@android:color/darker_gray"
+        tools:text= "September 28th, 2020"/>
+
     <Button
         android:id="@+id/btnEditNote"
         android:layout_width="wrap_content"

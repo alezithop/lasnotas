@@ -13,6 +13,7 @@ class NotesAdapter (private val mNotes: List<Note>): RecyclerView.Adapter<NotesA
 
     inner class ViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView) {
         val noteTextView = itemView.findViewById<TextView>(R.id.tvNotePreview)
+        val noteDateTextView = itemView.findViewById<TextView>(R.id.tvNoteDate)
         val editButton = itemView.findViewById<Button>(R.id.btnEditNote)
     }
 
@@ -32,6 +33,10 @@ class NotesAdapter (private val mNotes: List<Note>): RecyclerView.Adapter<NotesA
         val note: Note = mNotes.get(position)
         val textView = viewHolder.noteTextView
         textView.setText(note.noteContent)
+
+        val labelDate = viewHolder.noteDateTextView
+        labelDate.text = note.createdDate
+
         val button = viewHolder.editButton
         button.text = if (note.isDeleted) "(Deleted)" else "Edit >"
         button.isEnabled = !note.isDeleted
