@@ -1,5 +1,6 @@
 package adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sacg.lasnotas.R
 import models.Note
+import java.text.SimpleDateFormat
 
 class NotesAdapter (private val mNotes: List<Note>): RecyclerView.Adapter<NotesAdapter.ViewHolder>() {
 
@@ -35,7 +37,12 @@ class NotesAdapter (private val mNotes: List<Note>): RecyclerView.Adapter<NotesA
         textView.setText(note.noteContent)
 
         val labelDate = viewHolder.noteDateTextView
-        labelDate.text = note.createdDate
+        var date = note.createdDate
+        val formatter = SimpleDateFormat("MMM dd yyyy HH:mma")
+        val answer: String = formatter.format(date)
+        Log.d("answer", answer)
+//        labelDate.text = note.createdDate.toString()
+        labelDate.text = answer + "holaaa"
 
         val button = viewHolder.editButton
         button.text = if (note.isDeleted) "(Deleted)" else "Edit >"
