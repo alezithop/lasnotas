@@ -1,11 +1,16 @@
 package models
 
 import android.util.Log
-import java.text.SimpleDateFormat
+// import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 class Note(val noteContent: String, val createdDate: Date, val isDeleted: Boolean) {
+
+    object GlobalVariables {
+        lateinit var notesDB: ArrayList<Note>
+    }
+
     companion object{
         private var lastContactId = 0
         fun createNotesList(numnotes: Int) : ArrayList<Note> {
@@ -35,7 +40,14 @@ class Note(val noteContent: String, val createdDate: Date, val isDeleted: Boolea
                 // notes.add(Note("$randomNoteContent ($lastContactId)", calendar.time, i <= numnotes / 2))
                 notes.add(Note(randomNoteContent + " (" + ++lastContactId  + ")", calendar.time, i <= numnotes / 2))
             }
+            GlobalVariables.notesDB = notes;
             return notes
         }
+
+        fun addNote(new_note: Note): ArrayList<Note> {
+            GlobalVariables.notesDB.add(new_note)
+            return GlobalVariables.notesDB
+        }
     }
+
 }

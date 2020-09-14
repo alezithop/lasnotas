@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Las notas</string>
+    <string name="title_hint">Title</string>
+    <string name="content_hint">Content</string>
+    <string name="imageHeader_hint">Image header</string>
+    <string name="save_button">Save</string>
+    <string name="new_note_title">New note</string>
     <string-array name="array_order">
         <item>Newest first</item>
         <item>Oldest first</item>

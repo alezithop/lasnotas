@@ -42,7 +42,7 @@ class NotesAdapter (private val mNotes: List<Note>): RecyclerView.Adapter<NotesA
         val answer: String = formatter.format(date)
         Log.d("answer", answer)
 //        labelDate.text = note.createdDate.toString()
-        labelDate.text = answer + "holaaa"
+        labelDate.text = answer
 
         val button = viewHolder.editButton
         button.text = if (note.isDeleted) "(Deleted)" else "Edit >"
