@@ -57,10 +57,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
                 val newNoteAdded = intent.getSerializableExtra("newNoteAdded") as Note
                 if(newNoteAdded != null) {
                     Log.d("HELLO", "Content data received is $newNoteAdded.noteContent ")
-                    Log.d("HELLO", "Content data received is $newNoteAdded.noteContent ")
-                    Log.d("HELLO", "Content data received is $newNoteAdded.noteContent ")
-                    Log.d("HELLO", "Content data received is $newNoteAdded.noteContent ")
-                    Log.d("HELLO", "Content data received is $newNoteAdded.noteContent ")
                 }
                 notes.add(newNoteAdded)
             }
