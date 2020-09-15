@@ -1,11 +1,12 @@
 package models
 
 import android.util.Log
+import java.io.Serializable
 // import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class Note(val noteContent: String, val createdDate: Date, val isDeleted: Boolean) {
+class Note(val noteContent: String, val createdDate: Date, val isDeleted: Boolean) : Serializable {
 
     object GlobalVariables {
         lateinit var notesDB: ArrayList<Note>

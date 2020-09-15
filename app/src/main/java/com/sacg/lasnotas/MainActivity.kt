@@ -50,8 +50,24 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
         /*val forecastList = findViewById<RecyclerView>(R.id.forecast_list)
         forecastList.layoutManager = LinearLayoutManager(this)
         forecastList.adapter = ForecastListAdapter(items)*/
+
+        val bundle: Bundle? = intent.extras
+        bundle?.let {
+            bundle.apply {
+                val newNoteAdded = intent.getSerializableExtra("newNoteAdded") as Note
+                if(newNoteAdded != null) {
+                    Log.d("HELLO", "Content data received is $newNoteAdded.noteContent ")
+                    Log.d("HELLO", "Content data received is $newNoteAdded.noteContent ")
+                    Log.d("HELLO", "Content data received is $newNoteAdded.noteContent ")
+                    Log.d("HELLO", "Content data received is $newNoteAdded.noteContent ")
+                    Log.d("HELLO", "Content data received is $newNoteAdded.noteContent ")
+                }
+                notes.add(newNoteAdded)
+            }
+        }
+
         addNoteBtn.setOnClickListener {
-            var intent = Intent(this, NewNoteActivity::class.java)
+            val intent = Intent(this, NewNoteActivity::class.java)
             startActivity(intent)
         }
     }
@@ -63,10 +79,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
     override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
         Log.d(TAG, "clicked the element: " + parent.getItemAtPosition(pos))
         sortNotes(parent.getItemAtPosition(pos) as String)
-    }
-
-    private fun createNewNote(_note: Note): ArrayList<Note>  {
-        return Note.addNote(_note)
     }
 
     private fun sortNotes(type: String) {
