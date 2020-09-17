@@ -3,9 +3,11 @@ package com.sacg.lasnotas
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import models.Note
 import java.io.Serializable
@@ -19,6 +21,7 @@ class NewNoteActivity: AppCompatActivity() {
     internal lateinit var imageHeaderET: EditText
     internal lateinit var imageBtn: ImageButton
     internal lateinit var saveBtn: Button
+    internal lateinit var userImageIV: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +31,12 @@ class NewNoteActivity: AppCompatActivity() {
         contentET = findViewById(R.id.etContent)
         imageHeaderET = findViewById(R.id.etImageHeader)
         imageBtn = findViewById(R.id.btnImage)
+        userImageIV = findViewById(R.id.ivImage)
         saveBtn = findViewById(R.id.btnSave)
+
+        imageBtn.setOnClickListener() {
+            userImageIV.visibility = View.VISIBLE
+        }
 
         saveBtn.setOnClickListener() {
             val calendar = Calendar.getInstance()

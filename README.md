@@ -42,6 +42,15 @@ val bundle: Bundle? = intent.extras
         }
 ---------------------------------------------------------------------------------------------
 
+PROGRAMMATICALLY VISIBILITY OF OBJECTS IN LAYOUT
+https://stackoverflow.com/questions/45553167/android-kotlin-visibility
+
+SCROLL VIEW for only one children view.
+https://stackoverflow.com/questions/52255575/how-to-make-a-scrollview-in-kotlin
+
+Display Image From Gallery in ImageView
+https://zaidisoft.com/android-imageview-display-image-from-gallery-or-camera/
+
 PENDING TO CHECK WITH NESTOR:
 Why do I had to add bigger padding in activity_main.xml to avoid few elements be hidden at bottom of the screen?
 android:paddingBottom="100dp"
