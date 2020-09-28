@@ -8,7 +8,7 @@
     android:layout_margin="10dp">
 
     <TextView
-        android:id="@+id/tvNotePreview"
+        android:id="@+id/tvNoteTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/list_item_text_normal"
@@ -19,11 +19,24 @@
         tools:text="Example of note" />
 
     <TextView
+        android:id="@+id/tvNotePreview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textSize="@dimen/error_text_normal"
+        app:layout_constraintEnd_toStartOf="@+id/btnEditNote"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNoteTitle"
+        tools:text="Example of content text" />
+
+    <TextView
         android:id="@+id/tvNoteDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/darker_gray"
         android:textSize="@dimen/error_text_normal"
+        android:textStyle="italic"
         app:layout_constraintTop_toBottomOf="@+id/tvNotePreview"
         app:layout_constraintVertical_bias="1.0"
         tools:text="September 28th, 2020" />
@@ -35,6 +48,8 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:textSize="@dimen/button_text_medium"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Edit" />
 </androidx.constraintlayout.widget.ConstraintLayout>

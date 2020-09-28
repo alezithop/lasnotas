@@ -8,10 +8,55 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sacg.lasnotas.R
-import models.Note
-import java.text.SimpleDateFormat
+// import models.NoteMockup
+import models.NoteModel
+// import java.text.SimpleDateFormat
 
-class NotesAdapter (private val mNotes: List<Note>): RecyclerView.Adapter<NotesAdapter.ViewHolder>() {
+class NotesAdapter (private val mNote: List<NoteModel>): RecyclerView.Adapter<NotesAdapter.ViewHolder>() {
+
+    inner class ViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView) {
+        val noteTitleTextView = itemView.findViewById<TextView>(R.id.tvNoteTitle)
+        val noteTextView = itemView.findViewById<TextView>(R.id.tvNotePreview)
+        val noteDateTextView = itemView.findViewById<TextView>(R.id.tvNoteDate)
+        val editButton = itemView.findViewById<Button>(R.id.btnEditNote)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val context = parent.context
+        val inflater = LayoutInflater.from(context)
+        val noteView = inflater.inflate(R.layout.item_note, parent, false)
+
+        return ViewHolder(noteView)
+    }
+
+    override fun getItemCount(): Int {
+        return mNote.size
+    }
+
+    override fun onBindViewHolder(viewHolder: NotesAdapter.ViewHolder, position: Int) {
+        val note: NoteModel = mNote.get(position)
+        val textViewTitle = viewHolder.noteTitleTextView
+        textViewTitle.setText(note.title)
+        val textView = viewHolder.noteTextView
+        textView.setText(note.content)
+
+        val labelDate = viewHolder.noteDateTextView
+        var date = note.createdDate
+        labelDate.text = date
+
+        val button = viewHolder.editButton
+        if (note.isDeleted == 0) {
+            button.text = "Edit >"
+            button.isEnabled = true
+        } else {
+            button.text = "(Deleted)"
+            button.isEnabled = false
+        }
+    }
+}
+
+/*
+class NotesAdapter (private val mNoteMockups: List<NoteMockup>): RecyclerView.Adapter<NotesAdapter.ViewHolder>() {
 
     inner class ViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView) {
         val noteTextView = itemView.findViewById<TextView>(R.id.tvNotePreview)
@@ -28,16 +73,16 @@ class NotesAdapter (private val mNotes: List<Note>): RecyclerView.Adapter<NotesA
     }
 
     override fun getItemCount(): Int {
-        return mNotes.size
+        return mNoteMockups.size
     }
 
     override fun onBindViewHolder(viewHolder: NotesAdapter.ViewHolder, position: Int) {
-        val note: Note = mNotes.get(position)
+        val noteMockup: NoteMockup = mNoteMockups.get(position)
         val textView = viewHolder.noteTextView
-        textView.setText(note.noteContent)
+        textView.setText(noteMockup.noteContent)
 
         val labelDate = viewHolder.noteDateTextView
-        var date = note.createdDate
+        var date = noteMockup.createdDate
         val formatter = SimpleDateFormat("MMM dd yyyy HH:mma")
         val answer: String = formatter.format(date)
         Log.d("answer", answer)
@@ -45,7 +90,7 @@ class NotesAdapter (private val mNotes: List<Note>): RecyclerView.Adapter<NotesA
         labelDate.text = answer
 
         val button = viewHolder.editButton
-        button.text = if (note.isDeleted) "(Deleted)" else "Edit >"
-        button.isEnabled = !note.isDeleted
+        button.text = if (noteMockup.isDeleted) "(Deleted)" else "Edit >"
+        button.isEnabled = !noteMockup.isDeleted
     }
-}
+}*/
