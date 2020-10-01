@@ -2,15 +2,14 @@ package com.sacg.lasnotas
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import models.Note
-import java.io.Serializable
+import models.NoteMockup
+import models.NoteModel
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -45,17 +44,19 @@ class NewNoteActivity: AppCompatActivity() {
             var tempContentStr = contentET.text.toString()
             var tempImageHeaderStr = imageHeaderET.text.toString()
 
-            val tempNewNote = Note("$tempTitleStr | $tempContentStr | $tempImageHeaderStr", calendar.time,false)
+            //val tempNewNote = NoteMockup("$tempTitleStr | $tempContentStr | $tempImageHeaderStr", calendar.time,false)
 
             val intent = Intent(this, MainActivity::class.java).apply {
-                putExtra("newNoteAdded", tempNewNote)
+                // putExtra("newNoteAdded", tempNewNote)
+                putExtra("newTempTitle", tempTitleStr)
+                putExtra("newTempContent", tempContentStr)
             }
             startActivity(intent)
         }
     }
 
-    private fun createNewNote(_note: Note): ArrayList<Note>  {
-        return Note.addNote(_note)
+    private fun createNewNote(_noteMockup: NoteMockup): ArrayList<NoteMockup>  {
+        return NoteMockup.addNote(_noteMockup)
     }
 
 }

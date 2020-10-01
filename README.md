@@ -51,6 +51,20 @@ https://stackoverflow.com/questions/52255575/how-to-make-a-scrollview-in-kotlin
 Display Image From Gallery in ImageView
 https://zaidisoft.com/android-imageview-display-image-from-gallery-or-camera/
 
+KOTLIN ANDROID SQLITE (DATABASE SCHEMA)
+https://developer.android.com/training/data-storage/sqlite#kotlin
+https://www.tutorialkart.com/kotlin-android/android-sqlite-example-application/
+https://sqlite.org/datatype3.html
+
+
+
+
+
+
+
+
+
+
 PENDING TO CHECK WITH NESTOR:
 Why do I had to add bigger padding in activity_main.xml to avoid few elements be hidden at bottom of the screen?
 android:paddingBottom="100dp"
