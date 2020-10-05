@@ -1,17 +1,21 @@
 package com.sacg.lasnotas
 
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ImageView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import models.NoteMockup
-import models.NoteModel
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.OutputStream
 import java.util.*
-import kotlin.collections.ArrayList
 
 class NewNoteActivity: AppCompatActivity() {
 
@@ -21,6 +25,9 @@ class NewNoteActivity: AppCompatActivity() {
     internal lateinit var imageBtn: ImageButton
     internal lateinit var saveBtn: Button
     internal lateinit var userImageIV: ImageView
+    internal lateinit var uriTV: TextView
+
+    val REQUEST_CODE = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,9 +39,10 @@ class NewNoteActivity: AppCompatActivity() {
         imageBtn = findViewById(R.id.btnImage)
         userImageIV = findViewById(R.id.ivImage)
         saveBtn = findViewById(R.id.btnSave)
+        uriTV = findViewById(R.id.tvUri)
 
         imageBtn.setOnClickListener() {
-            userImageIV.visibility = View.VISIBLE
+            openGalleryForImage()
         }
 
         saveBtn.setOnClickListener() {
@@ -43,20 +51,57 @@ class NewNoteActivity: AppCompatActivity() {
             var tempTitleStr = titleET.text.toString()
             var tempContentStr = contentET.text.toString()
             var tempImageHeaderStr = imageHeaderET.text.toString()
+            var tempUri = saveImageToInternalStorage()
 
-            //val tempNewNote = NoteMockup("$tempTitleStr | $tempContentStr | $tempImageHeaderStr", calendar.time,false)
+            //val tempNewNote = _NoteMockup("$tempTitleStr | $tempContentStr | $tempImageHeaderStr", calendar.time,false)
 
             val intent = Intent(this, MainActivity::class.java).apply {
                 // putExtra("newNoteAdded", tempNewNote)
                 putExtra("newTempTitle", tempTitleStr)
                 putExtra("newTempContent", tempContentStr)
+                putExtra("newTemp", tempUri)
             }
             startActivity(intent)
         }
     }
 
-    private fun createNewNote(_noteMockup: NoteMockup): ArrayList<NoteMockup>  {
-        return NoteMockup.addNote(_noteMockup)
+    private fun openGalleryForImage() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, REQUEST_CODE)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?)
+    {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
+            userImageIV.visibility = View.VISIBLE
+            // Handle chosen image
+            userImageIV.setImageURI(data?.data)
+        }
+    }
+
+    private fun saveImageToInternalStorage() : Uri {
+        var bitmap = (userImageIV.drawable as BitmapDrawable).bitmap
+        val wrapper = ContextWrapper(applicationContext)
+        var file = wrapper.getDir("images", Context.MODE_PRIVATE)
+        file = File(file, "${UUID.randomUUID()}.jpg")
+
+        try {
+            val stream: OutputStream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+            stream.flush()
+            stream.close()
+            uriTV.text = Uri.parse(file.absolutePath).toString()
+        } catch (e:IOException) {
+            e.printStackTrace()
+        }
+        return Uri.parse(file.absolutePath)
+    }
+
+/*
+    private fun createNewNote(_noteMockup: _NoteMockup): ArrayList<_NoteMockup>  {
+        return _NoteMockup.addNote(_noteMockup)
+    }
+*/
 }

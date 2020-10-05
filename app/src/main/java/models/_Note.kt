@@ -2,7 +2,7 @@ package models
 
 import java.util.*
 
-class Note {
+class _Note {
     var id_note: Int = 0;
     var title: String = "";
     var content: String = "";

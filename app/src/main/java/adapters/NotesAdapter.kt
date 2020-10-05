@@ -8,7 +8,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sacg.lasnotas.R
-// import models.NoteMockup
+// import models._NoteMockup
 import models.NoteModel
 // import java.text.SimpleDateFormat
 
@@ -56,7 +56,7 @@ class NotesAdapter (private val mNote: List<NoteModel>): RecyclerView.Adapter<No
 }
 
 /*
-class NotesAdapter (private val mNoteMockups: List<NoteMockup>): RecyclerView.Adapter<NotesAdapter.ViewHolder>() {
+class NotesAdapter (private val mNoteMockups: List<_NoteMockup>): RecyclerView.Adapter<NotesAdapter.ViewHolder>() {
 
     inner class ViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView) {
         val noteTextView = itemView.findViewById<TextView>(R.id.tvNotePreview)
@@ -77,7 +77,7 @@ class NotesAdapter (private val mNoteMockups: List<NoteMockup>): RecyclerView.Ad
     }
 
     override fun onBindViewHolder(viewHolder: NotesAdapter.ViewHolder, position: Int) {
-        val noteMockup: NoteMockup = mNoteMockups.get(position)
+        val noteMockup: _NoteMockup = mNoteMockups.get(position)
         val textView = viewHolder.noteTextView
         textView.setText(noteMockup.noteContent)
 

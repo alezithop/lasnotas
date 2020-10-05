@@ -6,16 +6,16 @@ import java.io.Serializable
 import java.util.*
 import kotlin.collections.ArrayList
 
-class NoteMockup(val noteContent: String, val createdDate: Date, val isDeleted: Boolean) : Serializable {
+class _NoteMockup(val noteContent: String, val createdDate: Date, val isDeleted: Boolean) : Serializable {
 
     object GlobalVariables {
-        lateinit var notesDB: ArrayList<NoteMockup>
+        lateinit var notesDB: ArrayList<_NoteMockup>
     }
 
     companion object{
         private var lastContactId = 0
-        fun createNotesList(numnotes: Int) : ArrayList<NoteMockup> {
-            val notes = ArrayList<NoteMockup>()
+        fun createNotesList(numnotes: Int) : ArrayList<_NoteMockup> {
+            val notes = ArrayList<_NoteMockup>()
             for (i in 1..numnotes) {
                 /*var date = Date()
                 val formatter = SimpleDateFormat("MMM dd yyyy HH:mma")
@@ -38,14 +38,14 @@ class NoteMockup(val noteContent: String, val createdDate: Date, val isDeleted: 
                     .toArray()
                     .map(source::get)
                     .joinToString("")
-                // noteMockups.add(NoteMockup("$randomNoteContent ($lastContactId)", calendar.time, i <= numnotes / 2))
-                notes.add(NoteMockup(randomNoteContent + " (" + ++lastContactId  + ")", calendar.time, i <= numnotes / 2))
+                // noteMockups.add(_NoteMockup("$randomNoteContent ($lastContactId)", calendar.time, i <= numnotes / 2))
+                notes.add(_NoteMockup(randomNoteContent + " (" + ++lastContactId  + ")", calendar.time, i <= numnotes / 2))
             }
             GlobalVariables.notesDB = notes;
             return notes
         }
 
-        fun addNote(new_noteMockup: NoteMockup): ArrayList<NoteMockup> {
+        fun addNote(new_noteMockup: _NoteMockup): ArrayList<_NoteMockup> {
             GlobalVariables.notesDB.add(new_noteMockup)
             return GlobalVariables.notesDB
         }

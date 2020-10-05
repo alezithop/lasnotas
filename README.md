@@ -56,12 +56,17 @@ https://developer.android.com/training/data-storage/sqlite#kotlin
 https://www.tutorialkart.com/kotlin-android/android-sqlite-example-application/
 https://sqlite.org/datatype3.html
 
+Pick Image From Gallery in Kotlin – Android
+https://handyopinion.com/pick-image-from-gallery-in-kotlin-android/
+https://devofandroid.blogspot.com/2018/09/pick-image-from-gallery-android-studio_15.html
 
 
+SAVE IMAGE TO INTERNAL STORAGE + BITMAP
+https://android--code.blogspot.com/2018/04/android-kotlin-save-image-to-internal.html
+https://handyopinion.com/pick-image-from-gallery-in-kotlin-android/
 
-
-
-
+Return type is 'Unit?', which is not a subtype of overridden
+https://stackoverflow.com/questions/57434712/return-type-is-unit-which-is-not-a-subtype-of-overridden
 
 
 

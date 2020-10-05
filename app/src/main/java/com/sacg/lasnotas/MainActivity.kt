@@ -12,13 +12,12 @@ import android.widget.Button
 import android.widget.Spinner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import models.NoteMockup
 import models.NoteModel
 import models.NotesDBHelper
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
 
-    // lateinit var noteMockups: ArrayList<NoteMockup>
+    // lateinit var noteMockups: ArrayList<_NoteMockup>
 
     internal val TAG = MainActivity::class.java.simpleName
     internal lateinit var spinner: Spinner
@@ -48,7 +47,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
         rvNotes = findViewById<View>(R.id.rvNotes) as RecyclerView
 
         // Initialize the array template of Notes
-        // noteMockups = NoteMockup.createNotesList(20)
+        // noteMockups = _NoteMockup.createNotesList(20)
         adapter = NotesAdapter(getAllNotes())
         //rvNotes.adapter = adapter
         //rvNotes.layoutManager = LinearLayoutManager(this)
@@ -61,7 +60,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
             bundle.apply {
                 val newTempTitle = intent.getSerializableExtra("newTempTitle")
                 val newTempContent= intent.getSerializableExtra("newTempContent")
-                // val newNoteAdded = intent.getSerializableExtra("newNoteAdded") as NoteMockup
+                // val newNoteAdded = intent.getSerializableExtra("newNoteAdded") as _NoteMockup
                 if(newTempTitle != null) {
                     Log.d("HELLO", "Content data received is $newTempTitle WITH $newTempContent .")
 
