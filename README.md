@@ -64,6 +64,7 @@ https://devofandroid.blogspot.com/2018/09/pick-image-from-gallery-android-studio
 SAVE IMAGE TO INTERNAL STORAGE + BITMAP
 https://android--code.blogspot.com/2018/04/android-kotlin-save-image-to-internal.html
 https://handyopinion.com/pick-image-from-gallery-in-kotlin-android/
+https://stackoverflow.com/questions/24644997/save-retrieve-images-from-sqlite-database
 
 Return type is 'Unit?', which is not a subtype of overridden
 https://stackoverflow.com/questions/57434712/return-type-is-unit-which-is-not-a-subtype-of-overridden
