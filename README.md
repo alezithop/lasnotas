@@ -75,10 +75,12 @@ https://stackoverflow.com/questions/5409751/get-generated-id-after-insert/540980
 Toast messages
 https://www.javatpoint.com/kotlin-android-toast
 
+Issue creating 2 tables:
+https://stackoverflow.com/questions/52490706/kotlin-sqlite-create-two-tables/52490809
 
-
-
-
+Issue with foreign key:
+https://stackoverflow.com/questions/35801466/android-database-sqlite-sqliteexception-near-foreign-syntax-error-code-1
+https://sqlite.org/foreignkeys.html
 
 PENDING TO CHECK WITH NESTOR:
 Why do I had to add bigger padding in activity_main.xml to avoid few elements be hidden at bottom of the screen?

@@ -84,12 +84,13 @@ class NewNoteActivity: AppCompatActivity() {
 
             //val tempNewNote = _NoteMockup("$tempTitleStr | $tempContentStr | $tempImageHeaderStr", calendar.time,false)
 
-            val intent = Intent(this, MainActivity::class.java).apply {
+            val intent = Intent(this, MainActivity::class.java)
+                /*.apply {
                 // putExtra("newNoteAdded", tempNewNote)
                 putExtra("newTempTitle", tempTitleStr)
                 putExtra("newTempContent", tempContentStr)
                 putExtra("newTempUri", tempUri)
-            }
+            }*/
             startActivity(intent)
         }
     }
