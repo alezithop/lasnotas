@@ -15,12 +15,14 @@ import kotlin.collections.ArrayList
 class NotesDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(SQL_CREATE_NOTE_ENTRIES)
+        db.execSQL(SQL_CREATE_IMAGE_ENTRIES)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         // This database is only a cache for online data, so its upgrade policy is
         // to simply to discard the data and start over
         db.execSQL(SQL_DELETE_NOTE_ENTRIES)
+        db.execSQL(SQL_DELETE_IMAGE_ENTRIES)
         onCreate(db)
     }
 
@@ -29,7 +31,7 @@ class NotesDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
     }
     // ====================================================  NOTES SECTION BEGIN  ====================================================
     @Throws(SQLiteConstraintException::class)
-    fun insertNote(note: NoteModel): Boolean {
+    fun insertNote(note: NoteModel): Long {
         // ========================================================================
         // Get Date for today to act as Time Stamp
         val calendar = Calendar.getInstance()
@@ -57,7 +59,7 @@ class NotesDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         // Insert the new row, returning the primary key value of the new row
         val newRowId = db.insert(DBContract.NoteEntry.TABLE_NAME, null, values)
 
-        return true
+        return newRowId
     }
 
     @Throws(SQLiteConstraintException::class)
@@ -141,7 +143,7 @@ class NotesDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
     // ====================================================  IMAGES SECTION BEGIN  ====================================================
     @Throws(SQLiteConstraintException::class)
-    fun insertImage(image: ImageModel): Boolean {
+    fun insertImage(image: ImageModel): Long {
         // ========================================================================
         // Get Date for today to act as Time Stamp
         val calendar = Calendar.getInstance()
@@ -170,7 +172,7 @@ class NotesDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         // Insert the new row, returning the primary key value of the new row
         val newRowId = db.insert(DBContract.ImageEntry.TABLE_NAME, null, values)
 
-        return true
+        return newRowId
     }
 
     @Throws(SQLiteConstraintException::class)
@@ -258,7 +260,7 @@ class NotesDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
     companion object {
         // If you change the database schema, you must increment the database version
-        val DATABASE_VERSION = 2
+        val DATABASE_VERSION = 3
         val DATABASE_NAME = "LasNotas.db"
 
         private val SQL_CREATE_NOTE_ENTRIES = "CREATE TABLE " + DBContract.NoteEntry.TABLE_NAME +
@@ -276,8 +278,8 @@ class NotesDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
                 " " + DBContract.ImageEntry.COLUMN_URI + " TEXT," +
                 " " + DBContract.ImageEntry.COLUMN_ID_NOTE + " INTEGER," +
                 " " + DBContract.ImageEntry.COLUMN_CREATED_DATE + " TEXT," +
-                " " + DBContract.ImageEntry.COLUMN_IS_DELETED + " INTEGER)" +
-                "FOREIGN KEY(" + DBContract.ImageEntry.COLUMN_ID_NOTE + ") REFERENCES " + DBContract.NoteEntry.TABLE_NAME + "(" + DBContract.NoteEntry.COLUMN_ID_NOTE + ")"
+                " " + DBContract.ImageEntry.COLUMN_IS_DELETED + " INTEGER," +
+                " FOREIGN KEY(" + DBContract.ImageEntry.COLUMN_ID_NOTE + ") REFERENCES " + DBContract.NoteEntry.TABLE_NAME + "(" + DBContract.NoteEntry.COLUMN_ID_NOTE + "))"
 
         private val SQL_DELETE_IMAGE_ENTRIES = "DROP TABLE IF EXISTS " + DBContract.ImageEntry.TABLE_NAME
     }

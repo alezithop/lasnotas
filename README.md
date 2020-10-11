@@ -69,6 +69,15 @@ https://stackoverflow.com/questions/24644997/save-retrieve-images-from-sqlite-da
 Return type is 'Unit?', which is not a subtype of overridden
 https://stackoverflow.com/questions/57434712/return-type-is-unit-which-is-not-a-subtype-of-overridden
 
+Get generated id after insert
+https://stackoverflow.com/questions/5409751/get-generated-id-after-insert/5409803#5409803
+
+Toast messages
+https://www.javatpoint.com/kotlin-android-toast
+
+
+
+
 
 
 PENDING TO CHECK WITH NESTOR:

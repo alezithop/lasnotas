@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.Spinner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import models.ImageModel
 import models.NoteModel
 import models.NotesDBHelper
 
@@ -55,21 +56,23 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
         forecastList.layoutManager = LinearLayoutManager(this)
         forecastList.adapter = ForecastListAdapter(items)*/
 
-        val bundle: Bundle? = intent.extras
+        /*val bundle: Bundle? = intent.extras
         bundle?.let {
             bundle.apply {
                 val newTempTitle = intent.getSerializableExtra("newTempTitle")
-                val newTempContent= intent.getSerializableExtra("newTempContent")
+                val newTempContent = intent.getSerializableExtra("newTempContent")
+                val newTempUri = intent.getSerializableExtra("newTempUri")
                 // val newNoteAdded = intent.getSerializableExtra("newNoteAdded") as _NoteMockup
                 if(newTempTitle != null) {
                     Log.d("HELLO", "Content data received is $newTempTitle WITH $newTempContent .")
 
                     // noteMockups.add(newNoteAdded)
                     val newTempNote = NoteModel(0, newTempTitle.toString(), newTempContent.toString(), "", 0)
-                    addNote(newTempNote)
+                    val newTempImage = ImageModel(0, "title", newTempUri.toString(),0, "", 0)
+                    // addNote(newTempNote)
                 }
             }
-        }
+        }*/
 
         addNoteBtn.setOnClickListener {
             val intent = Intent(this, NewNoteActivity::class.java)
@@ -88,11 +91,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
 
     private fun getAllNotes() : ArrayList<NoteModel> {
         return notesDBHelper.readAllNotes()
-    }
-
-    private fun addNote(note: NoteModel) : Boolean {
-        var result = notesDBHelper.insertNote(note)
-        return true
     }
 
     private fun sortNotes(type: String) {
