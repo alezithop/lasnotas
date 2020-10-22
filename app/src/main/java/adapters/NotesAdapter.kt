@@ -1,18 +1,21 @@
 package adapters
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.sacg.lasnotas.NewNoteActivity
 import com.sacg.lasnotas.R
 // import models._NoteMockup
 import models.NoteModel
 // import java.text.SimpleDateFormat
 
-class NotesAdapter (private val mNote: List<NoteModel>): RecyclerView.Adapter<NotesAdapter.ViewHolder>() {
+class NotesAdapter (private val mNote: List<NoteModel>, private val cellClickListener: CellClickListener): RecyclerView.Adapter<NotesAdapter.ViewHolder>() {
 
     inner class ViewHolder(listItemView: View) : RecyclerView.ViewHolder(listItemView) {
         val noteTitleTextView = itemView.findViewById<TextView>(R.id.tvNoteTitle)
@@ -33,6 +36,10 @@ class NotesAdapter (private val mNote: List<NoteModel>): RecyclerView.Adapter<No
         return mNote.size
     }
 
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
     override fun onBindViewHolder(viewHolder: NotesAdapter.ViewHolder, position: Int) {
         val note: NoteModel = mNote.get(position)
         val textViewTitle = viewHolder.noteTitleTextView
@@ -51,6 +58,9 @@ class NotesAdapter (private val mNote: List<NoteModel>): RecyclerView.Adapter<No
         } else {
             button.text = "(Deleted)"
             button.isEnabled = false
+        }
+        viewHolder.itemView.setOnClickListener{
+            cellClickListener.onCellClickListener(note)
         }
     }
 }

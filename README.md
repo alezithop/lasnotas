@@ -82,6 +82,11 @@ Issue with foreign key:
 https://stackoverflow.com/questions/35801466/android-database-sqlite-sqliteexception-near-foreign-syntax-error-code-1
 https://sqlite.org/foreignkeys.html
 
+Recycler View Using kotlin with cell click listener
+https://medium.com/@aayushpuranik/recycler-view-using-kotlin-with-click-listener-46e7884eaf59
+
+
+
 PENDING TO CHECK WITH NESTOR:
 Why do I had to add bigger padding in activity_main.xml to avoid few elements be hidden at bottom of the screen?
 android:paddingBottom="100dp"

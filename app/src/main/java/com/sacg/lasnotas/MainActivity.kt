@@ -1,22 +1,21 @@
 package com.sacg.lasnotas
 
+import adapters.CellClickListener
 import adapters.NotesAdapter
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.Spinner
+import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import models.ImageModel
 import models.NoteModel
 import models.NotesDBHelper
 
-class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
+class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, CellClickListener {
 
     // lateinit var noteMockups: ArrayList<_NoteMockup>
 
@@ -49,7 +48,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
 
         // Initialize the array template of Notes
         // noteMockups = _NoteMockup.createNotesList(20)
-        adapter = NotesAdapter(getAllNotes())
+        adapter = NotesAdapter(getAllNotes(), this)
         //rvNotes.adapter = adapter
         //rvNotes.layoutManager = LinearLayoutManager(this)
         /*val forecastList = findViewById<RecyclerView>(R.id.forecast_list)
@@ -78,6 +77,16 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
             val intent = Intent(this, NewNoteActivity::class.java)
             startActivity(intent)
         }
+
+    }
+
+    override fun onCellClickListener(note: NoteModel) {
+        Toast.makeText(this, "Cell clicked", Toast.LENGTH_LONG).show()
+        val intent = Intent(this, DetailNoteActivity::class.java)
+            .apply {
+                putExtra("noteID", note.id_note)
+            }
+        startActivity(intent)
     }
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -98,7 +107,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
             // pass the data to the NotesAdapter class to generate the new list updated based in the user selection, showing "Newest items first"
             // adapter = NotesAdapter(noteMockups.sortedWith(compareByDescending({ it.createdDate })))
 
-            adapter = NotesAdapter(getAllNotes().sortedWith(compareByDescending({ it.createdDate })))
+            adapter = NotesAdapter(getAllNotes().sortedWith(compareByDescending({ it.createdDate })), this)
             // update the recyclerview from activity_main screen to display the updated and sorted items
             rvNotes.adapter = adapter
             rvNotes.layoutManager = LinearLayoutManager(this)
@@ -106,7 +115,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
         if (type == "Oldest first") {
             // pass the data to the NotesAdapter class to generate the new list updated based in the user selection, showing "Oldest items first"
             // adapter = NotesAdapter(noteMockups.sortedWith(compareBy({ it.createdDate })))
-            adapter = NotesAdapter(getAllNotes().sortedWith(compareBy({ it.createdDate })))
+            adapter = NotesAdapter(getAllNotes().sortedWith(compareBy({ it.createdDate })), this)
             // update the recyclerview from activity_main screen to display the updated and sorted items
             rvNotes.adapter = adapter
             rvNotes.layoutManager = LinearLayoutManager(this)
@@ -114,7 +123,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
         if (type == "Title") {
             // pass the data to the NotesAdapter class to generate the new list updated based in the user selection, showing items sorted by "Title"
             //adapter = NotesAdapter(noteMockups.sortedWith(compareBy({ it.noteContent })))
-            adapter = NotesAdapter(getAllNotes().sortedWith(compareBy({ it.title })))
+            adapter = NotesAdapter(getAllNotes().sortedWith(compareBy({ it.title })), this)
             // update the recyclerview from activity_main screen to display the updated and sorted items
             rvNotes.adapter = adapter
             rvNotes.layoutManager = LinearLayoutManager(this)
