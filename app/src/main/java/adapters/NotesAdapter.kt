@@ -53,7 +53,7 @@ class NotesAdapter (private val mNote: List<NoteModel>, private val cellClickLis
 
         val button = viewHolder.editButton
         if (note.isDeleted == 0) {
-            button.text = "Edit >"
+            button.text = ">"
             button.isEnabled = true
         } else {
             button.text = "(Deleted)"

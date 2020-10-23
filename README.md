@@ -85,6 +85,25 @@ https://sqlite.org/foreignkeys.html
 Recycler View Using kotlin with cell click listener
 https://medium.com/@aayushpuranik/recycler-view-using-kotlin-with-click-listener-46e7884eaf59
 
+How to get the first element from the first element of a list using kotlin?
+https://stackoverflow.com/questions/57026733/how-to-get-the-first-char-from-the-first-element-of-a-list-using-kotlin
+https://kotlinlang.org/docs/reference/collection-elements.html
+
+Kotlin - How do I concatenate a String to an Int value?
+https://stackoverflow.com/questions/56390121/kotlin-how-do-i-concatenate-a-string-to-an-int-value
+
+Convert String to Uri
+https://stackoverflow.com/questions/3487389/convert-string-to-uri
+
+Border color on Android button
+https://stackoverflow.com/questions/19010573/border-color-on-android-button/29071340
+
+Textview show partial text
+https://stackoverflow.com/questions/4860020/textview-show-partial-text
+
+SQLLite update doesn't update the table at all (Android Studio with Kotlin)
+https://stackoverflow.com/questions/56179532/sqllite-update-doesnt-update-the-table-at-all-android-studio-with-kotlin
+https://www.sqlitetutorial.net/sqlite-update/
 
 
 PENDING TO CHECK WITH NESTOR:

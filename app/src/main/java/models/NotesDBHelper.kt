@@ -63,6 +63,25 @@ class NotesDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
     }
 
     @Throws(SQLiteConstraintException::class)
+    fun updateNote(note: NoteModel): Int {
+        // Gets the data repository in write mode
+        val db = writableDatabase
+
+        // Create a new map of values, where column names are the keys
+        val values = ContentValues()
+        values.put(DBContract.NoteEntry.COLUMN_TITLE, note.title)
+        values.put(DBContract.NoteEntry.COLUMN_CONTENT, note.content)
+        values.put(DBContract.NoteEntry.COLUMN_IS_DELETED, note.isDeleted)
+
+        // Define 'where' section of query
+        val filter = DBContract.NoteEntry.COLUMN_ID_NOTE + " = ?"
+        // Specify arguments in placeholder order
+        val filterArgs = arrayOf(note.id_note.toString())
+        // Issue SQL statement
+        return db.update(DBContract.NoteEntry.TABLE_NAME, values, filter, filterArgs)
+    }
+
+    @Throws(SQLiteConstraintException::class)
     fun deleteNote(noteID: Int): Boolean {
         // Gets the data repository in write mode
         val db = writableDatabase
@@ -189,19 +208,20 @@ class NotesDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         return true
     }
 
-    fun readImage(imageID: Int): ArrayList<ImageModel> {
+    fun readImage(noteID: Int): ArrayList<ImageModel> {
         val images = ArrayList<ImageModel>()
         val db = writableDatabase
         var cursor: Cursor? = null
         try {
             cursor = db.rawQuery("SELECT * FROM " + DBContract.ImageEntry.TABLE_NAME + " WHERE "
-                    + DBContract.ImageEntry.COLUMN_ID_IMAGE + "='" + imageID + "'", null)
+                    + DBContract.ImageEntry.COLUMN_ID_NOTE + "='" + noteID + "'", null)
         } catch (e: SQLiteException) {
             // id table not yet present, create it
             db.execSQL(SQL_CREATE_IMAGE_ENTRIES)
             return ArrayList()
         }
 
+        var imageID: Int
         var title: String
         var uri: String
         var idNote: Int
@@ -210,13 +230,14 @@ class NotesDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
 
         if (cursor!!.moveToFirst()) {
             while (cursor.isAfterLast == false) {
+                imageID = cursor.getInt(cursor.getColumnIndex(DBContract.ImageEntry.COLUMN_ID_IMAGE))
                 title = cursor.getString(cursor.getColumnIndex(DBContract.ImageEntry.COLUMN_TITLE))
                 uri = cursor.getString(cursor.getColumnIndex(DBContract.ImageEntry.COLUMN_URI))
-                idNote = cursor.getInt(cursor.getColumnIndex(DBContract.ImageEntry.COLUMN_ID_NOTE))
+                // idNote = cursor.getInt(cursor.getColumnIndex(DBContract.ImageEntry.COLUMN_ID_NOTE))
                 createdDate = cursor.getString(cursor.getColumnIndex(DBContract.ImageEntry.COLUMN_CREATED_DATE))
                 isDeleted = cursor.getInt(cursor.getColumnIndex(DBContract.ImageEntry.COLUMN_IS_DELETED))
 
-                images.add(ImageModel(imageID, title, uri, idNote, createdDate, isDeleted))
+                images.add(ImageModel(imageID, title, uri, noteID, createdDate, isDeleted))
                 cursor.moveToNext()
             }
         }

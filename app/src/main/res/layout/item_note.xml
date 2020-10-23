@@ -22,6 +22,9 @@
         android:id="@+id/tvNotePreview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:lines="2"
+        android:ellipsize="marquee"
         android:layout_marginTop="4dp"
         android:textSize="@dimen/error_text_normal"
         app:layout_constraintEnd_toStartOf="@+id/btnEditNote"
@@ -45,11 +48,12 @@
         android:id="@+id/btnEditNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:textSize="@dimen/button_text_medium"
+        android:textSize="@dimen/button_next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Edit" />
+        tools:text=">" />
 </androidx.constraintlayout.widget.ConstraintLayout>
