@@ -105,6 +105,15 @@ SQLLite update doesn't update the table at all (Android Studio with Kotlin)
 https://stackoverflow.com/questions/56179532/sqllite-update-doesnt-update-the-table-at-all-android-studio-with-kotlin
 https://www.sqlitetutorial.net/sqlite-update/
 
+View SQLite database on device in Android Studio
+https://www.youtube.com/watch?v=cnofgNp5Zzg
+https://developer.android.com/studio/inspect/database
+https://stackoverflow.com/questions/28220636/view-sqlite-database-on-device-in-android-studio
+
+How to get Top 5 records in SqLite?
+https://stackoverflow.com/questions/2728999/how-to-get-top-5-records-in-sqlite
+
+
 
 PENDING TO CHECK WITH NESTOR:
 Why do I had to add bigger padding in activity_main.xml to avoid few elements be hidden at bottom of the screen?
