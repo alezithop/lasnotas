@@ -195,6 +195,23 @@ class NotesDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
     }
 
     @Throws(SQLiteConstraintException::class)
+    fun deleteImage(image: ImageModel): Int {
+        // Gets the data repository in write mode
+        val db = writableDatabase
+
+        // Create a new map of values, where column names are the keys
+        val values = ContentValues()
+        values.put(DBContract.ImageEntry.COLUMN_IS_DELETED, "1")
+
+        // Define 'where' section of query
+        val filter = DBContract.ImageEntry.COLUMN_ID_IMAGE + " = ?"
+        // Specify arguments in placeholder order
+        val filterArgs = arrayOf(image.id_image.toString())
+        // Issue SQL statement
+        return db.update(DBContract.ImageEntry.TABLE_NAME, values, filter, filterArgs)
+    }
+
+    /*@Throws(SQLiteConstraintException::class)
     fun deleteImage(imageID: Int): Boolean {
         // Gets the data repository in write mode
         val db = writableDatabase
@@ -206,6 +223,16 @@ class NotesDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         db.delete(DBContract.ImageEntry.TABLE_NAME, filter, filterArgs)
 
         return true
+    }*/
+
+    fun reeplaceImage(image: ImageModel): Long {
+        if(deleteImage(image) >= 0) {
+            Log.d("WARNING", "Old image was deleted successfully.")
+        } else {
+            Log.d("ERROR", "IMAGE was not deleted.")
+        }
+
+        return insertImage(image)
     }
 
     fun readImage(noteID: Int): ArrayList<ImageModel> {
@@ -214,7 +241,7 @@ class NotesDBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
         var cursor: Cursor? = null
         try {
             cursor = db.rawQuery("SELECT * FROM " + DBContract.ImageEntry.TABLE_NAME + " WHERE "
-                    + DBContract.ImageEntry.COLUMN_ID_NOTE + "='" + noteID + "'", null)
+                    + DBContract.ImageEntry.COLUMN_ID_NOTE + "='" + noteID + "' ORDER BY " + DBContract.ImageEntry.COLUMN_ID_IMAGE + " DESC LIMIT 1", null)
         } catch (e: SQLiteException) {
             // id table not yet present, create it
             db.execSQL(SQL_CREATE_IMAGE_ENTRIES)

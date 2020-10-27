@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener, Ce
     }
 
     override fun onCellClickListener(note: NoteModel) {
-        Toast.makeText(this, "Cell clicked", Toast.LENGTH_LONG).show()
+        //Toast.makeText(this, "Cell clicked", Toast.LENGTH_LONG).show()
         val intent = Intent(this, DetailNoteActivity::class.java)
             .apply {
                 putExtra("noteID", note.id_note)

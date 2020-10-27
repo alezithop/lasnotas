@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -37,6 +38,8 @@ class DetailNoteActivity: AppCompatActivity()  {
 
     val REQUEST_CODE = 100
 
+    var globalNoteID = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.item_note_details)
@@ -51,10 +54,15 @@ class DetailNoteActivity: AppCompatActivity()  {
         saveBtn = findViewById(R.id.btnSave)
         uriTV = findViewById(R.id.tvUri)
 
+        imageBtn.setOnClickListener() {
+            openGalleryForImage()
+        }
+
         val bundle: Bundle? = intent.extras
         bundle?.let {
             bundle.apply {
                 val noteID = intent.getSerializableExtra("noteID")
+                globalNoteID = noteID.toString().toInt()
                 val note = getNote(noteID.toString().toInt()).first()
                 val image = getImage(noteID.toString().toInt()).first()
                 var header = "${getString(R.string.detail_note_title)} ( ${note.id_note.toString()} )"
@@ -64,9 +72,38 @@ class DetailNoteActivity: AppCompatActivity()  {
                 imageHeaderET.setText(image.title)
                 userImageIV.visibility = View.VISIBLE
                 userImageIV.setImageURI(Uri.parse(image.uri))
-                uriTV.setText(image.uri)
+                // uriTV.setText(image.uri)
+                tempUri = image.uri
             }
         }
+
+        saveBtn.setOnClickListener() {
+            val calendar = Calendar.getInstance()
+
+            var tempTitleStr = titleET.text.toString()
+            var tempContentStr = contentET.text.toString()
+            var temImageTitleStr = imageHeaderET.text.toString()
+            var tempImageHeaderStr = imageHeaderET.text.toString()
+
+            val tempIdNote = updateNote(NoteModel(globalNoteID, tempTitleStr, tempContentStr, calendar.time.toString(), 0))
+
+            if (tempIdNote <= 0) {
+                Log.d("ISSUE", "There was an issue updating the note. Note was not updated.")
+                val toast = Toast.makeText(applicationContext, "There was an issue updating the note. Note was not updated", Toast.LENGTH_LONG).show()
+            } else {
+                if(tempImageHeaderStr.isNotEmpty() || tempUri.toString().isNotEmpty()) {
+                    val tempIdImage = updateImage(ImageModel(0, temImageTitleStr, tempUri, globalNoteID, calendar.time.toString(), 0))
+                    if(tempIdImage < 0) {
+                        Log.d("ISSUE", "There was an issue saving the image. Image was not updated.")
+                        val toast = Toast.makeText(applicationContext, "There was an issue updating the image. Image was not updated.", Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     private fun getNote(noteID: Int) : ArrayList<NoteModel> {
@@ -84,8 +121,8 @@ class DetailNoteActivity: AppCompatActivity()  {
         return result
     }
 
-    private fun addImage(image: ImageModel) : Long {
-        var result = notesDBHelper.insertImage(image)
+    private fun updateImage(image: ImageModel) : Long {
+        var result = notesDBHelper.reeplaceImage(image)
         return result
     }
 
@@ -103,7 +140,7 @@ class DetailNoteActivity: AppCompatActivity()  {
             // Handle chosen image
             userImageIV.setImageURI(data?.data)
             tempUri = saveImageToInternalStorage()
-            uriTV.text = tempUri
+            // uriTV.text = tempUri
         }
     }
 

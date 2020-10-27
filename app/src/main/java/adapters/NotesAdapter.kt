@@ -21,7 +21,7 @@ class NotesAdapter (private val mNote: List<NoteModel>, private val cellClickLis
         val noteTitleTextView = itemView.findViewById<TextView>(R.id.tvNoteTitle)
         val noteTextView = itemView.findViewById<TextView>(R.id.tvNotePreview)
         val noteDateTextView = itemView.findViewById<TextView>(R.id.tvNoteDate)
-        val editButton = itemView.findViewById<Button>(R.id.btnEditNote)
+        //val editButton = itemView.findViewById<Button>(R.id.btnEditNote)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -51,14 +51,14 @@ class NotesAdapter (private val mNote: List<NoteModel>, private val cellClickLis
         var date = note.createdDate
         labelDate.text = date
 
-        val button = viewHolder.editButton
+        /*val button = viewHolder.editButton
         if (note.isDeleted == 0) {
             button.text = ">"
             button.isEnabled = true
         } else {
             button.text = "(Deleted)"
             button.isEnabled = false
-        }
+        }*/
         viewHolder.itemView.setOnClickListener{
             cellClickListener.onCellClickListener(note)
         }

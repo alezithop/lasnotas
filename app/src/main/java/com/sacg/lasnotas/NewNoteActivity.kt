@@ -68,7 +68,7 @@ class NewNoteActivity: AppCompatActivity() {
             // val newTempNote = NoteModel(0, newTempTitle.toString(), newTempContent.toString(), "", 0)
             val tempIdNote = addNote(NoteModel(0, tempTitleStr, tempContentStr, calendar.time.toString(), 0))
 
-            if (tempIdNote < 0) {
+            if (tempIdNote <= 0) {
                 Log.d("ISSUE", "There was an issue saving the note.")
                 val toast = Toast.makeText(applicationContext, "There was an issue saving the note.", Toast.LENGTH_LONG).show()
             } else {
@@ -119,7 +119,7 @@ class NewNoteActivity: AppCompatActivity() {
             // Handle chosen image
             userImageIV.setImageURI(data?.data)
             tempUri = saveImageToInternalStorage()
-            uriTV.text = tempUri
+            // uriTV.text = tempUri
         }
     }
 
